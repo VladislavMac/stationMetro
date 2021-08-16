@@ -195,7 +195,7 @@ let outDesc = document.querySelector('.outDesc');
 let outNew  = document.querySelector('.outNew');
 let outErr  = document.querySelector('.outErr');
 
-document.querySelector('.stationBut').onclick = function statButFunc(){
+document.querySelector('.stationBut').onclick = function(){
     let val        = inp.value;
 
     let newVal     = '';
@@ -246,8 +246,10 @@ setInterval(function(){
     let empty = '';
     let val = inp.value;
     let outHelp = '';
+    let newVal = '';
     if( val.length > 0 ) // проверка
     {
+        newVal = val[0].toUpperCase() +val.slice(1);
     for( let key in station)
     {
         for(let i = 0; i < station[key].length; i++)
@@ -255,7 +257,7 @@ setInterval(function(){
             // for( let k = 0; k < station[key][i][0].length; k++ )
             // {
                 let ser = station[key][i][0].split('').slice(0,val.length).join('');
-                if( ser == val )
+                if( ser == newVal )
                 {
                     empty += `<div class='out stat'>${station[key][i][0]}</div><br>`;
                     outHelp = document.querySelector('.stat');
@@ -275,7 +277,7 @@ setInterval(function(){
         document.querySelector('.stat').onclick = function(){
             // console.log(this.textContent) // test
             inp.value = this.textContent;
-            statButFunc();
+            document.querySelector('.stationBut').click();
         }
     }
 }, 3000);
