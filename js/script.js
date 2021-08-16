@@ -195,7 +195,7 @@ let outDesc = document.querySelector('.outDesc');
 let outNew  = document.querySelector('.outNew');
 let outErr  = document.querySelector('.outErr');
 
-document.querySelector('.stationBut').onclick = function(){
+document.querySelector('.stationBut').onclick = function statButFunc(){
     let val        = inp.value;
 
     let newVal     = '';
@@ -235,30 +235,48 @@ document.querySelector('.stationBut').onclick = function(){
         }
     }
         // Да, гавнокод но по другому (у меня) не получилось. Главное работает как говорится 'Работает, не трогай'
-        if( outStat.textContent == '' && outDesc.textContent == '' )
-        {
-            let empty = '';
-            let val = inp.value;
-            if( val.length > 0 )
-            {
-                for( let key in station)
-                {
-                    for(let i = 0; i < station[key].length; i++)
-                    {
-                        // for( let k = 0; k < station[key][i][0].length; k++ )
-                        // {
-                            let ser = station[key][i][0].split('').slice(0,val.length).join('');
-                            if( ser == val )
-                            {
-                                empty += station[key][i][0] + ', <br>';
-                            }
-                        // }
-                    }
-                }
-            }
+        // if( outStat.textContent == '' && outDesc.textContent == '' )
+        // {
 
-            outErr.innerHTML = `К сожелению не чего не найдено :( Может вы имели ввиду: <br> ${empty} `
-        }
+        // }
     inp.value = '';
-
 }
+
+setInterval(function(){
+    let empty = '';
+    let val = inp.value;
+    let outHelp = '';
+    if( val.length > 0 ) // проверка
+    {
+    for( let key in station)
+    {
+        for(let i = 0; i < station[key].length; i++)
+        {
+            // for( let k = 0; k < station[key][i][0].length; k++ )
+            // {
+                let ser = station[key][i][0].split('').slice(0,val.length).join('');
+                if( ser == val )
+                {
+                    empty += `<div class='out stat'>${station[key][i][0]}</div><br>`;
+                    outHelp = document.querySelector('.stat');
+                }
+                // }
+            }
+        }
+    }
+        
+        outErr.innerHTML = `${empty} `
+
+
+    // if чтоб не было ошибок
+    if( outHelp != '' )
+    {
+        // При нажатии на подсказку
+        document.querySelector('.stat').onclick = function(){
+            // console.log(this.textContent) // test
+            inp.value = this.textContent;
+            statButFunc();
+        }
+    }
+}, 3000);
+    
