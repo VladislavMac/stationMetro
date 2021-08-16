@@ -234,11 +234,6 @@ document.querySelector('.stationBut').onclick = function(){
             }
         }
     }
-        // Да, гавнокод но по другому (у меня) не получилось. Главное работает как говорится 'Работает, не трогай'
-        // if( outStat.textContent == '' && outDesc.textContent == '' )
-        // {
-
-        // }
     inp.value = '';
 }
 
