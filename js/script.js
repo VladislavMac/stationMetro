@@ -240,7 +240,7 @@ document.querySelector('.stationBut').onclick = function(){
 setInterval(function(){
     let empty = '';
     let val = inp.value;
-    let outHelp = '';
+    var outHelp = '';
     let newVal = '';
     if( val.length > 0 ) // проверка
     {
@@ -268,12 +268,16 @@ setInterval(function(){
     // if чтоб не было ошибок
     if( outHelp != '' )
     {
-        // При нажатии на подсказку
-        document.querySelector('.stat').onclick = function(){
-            // console.log(this.textContent) // test
-            inp.value = this.textContent;
-            document.querySelector('.stationBut').click();
+        let outHelpAll = document.querySelectorAll('.stat');
+        for( let k = 0; k < outHelpAll.length; k++ ){
+            console.log(outHelpAll[k])
+            // При нажатии на подсказку
+            outHelpAll[k].onclick = function(){
+                inp.value = this.textContent;
+                document.querySelector('.stationBut').click();
+            }
         }
+
     }
 }, 3000);
     
